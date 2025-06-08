@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - LogFoundry</title>
+    <link rel="icon" type="image/x-icon" href="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2b6cb0;
+            --primary-dark: #2c5282;
+            --secondary: #f6ad55;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #a0aec0;
+            --success: #48bb78;
+            --error: #f56565;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        /* Features Hero Section */
+        .features-hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .features-hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .features-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Feature Categories */
+        .feature-categories {
+            padding: 80px 0;
+        }
+
+        .category {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .category-title h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .category-title p {
+            color: var(--gray-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--gray-dark);
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Integration Section */
+        .integrations {
+            background-color: var(--gray);
+            padding: 80px 0;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .integration-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .integration-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .integration-item img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .features-hero h2 {
+                font-size: 32px;
+            }
+
+            .features-hero p {
+                font-size: 18px;
+            }
+
+            .category-title h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc" alt="LogFoundry Logo">
+                <h1>LogFoundry</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Features Hero Section -->
+    <section class="features-hero">
+        <div class="container">
+            <h2>Powerful Features for Modern Observability</h2>
+            <p>Discover how LogFoundry's comprehensive feature set can transform your log management and monitoring experience.</p>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section class="feature-categories">
+        <div class="container">
+            <div class="category">
+                <div class="category-title">
+                    <h2>Core Features</h2>
+                    <p>Essential tools for effective log management and analysis</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Real-time Log Analysis</h3>
+                        <p>Monitor and analyze your logs in real-time with powerful search capabilities and instant insights.</p>
+                        <ul class="feature-list">
+                            <li>Full-text search across all logs</li>
+                            <li>Advanced filtering and querying</li>
+                            <li>Real-time log streaming</li>
+                            <li>Custom log parsing rules</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI-Powered Anomaly Detection</h3>
+                        <p>Leverage machine learning to automatically detect unusual patterns and potential issues.</p>
+                        <ul class="feature-list">
+                            <li>Automated anomaly detection</li>
+                            <li>Pattern recognition</li>
+                            <li>Predictive analytics</li>
+                            <li>Smart alerting system</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Custom Dashboards</h3>
+                        <p>Create and customize dashboards to visualize your data exactly how you need it.</p>
+                        <ul class="feature-list">
+                            <li>Drag-and-drop dashboard builder</li>
+                            <li>Pre-built dashboard templates</li>
+                            <li>Real-time data visualization</li>
+                            <li>Custom metrics and KPIs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-title">
+                    <h2>Advanced Capabilities</h2>
+                    <p>Enterprise-grade features for sophisticated monitoring needs</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Security & Compliance</h3>
+                        <p>Enterprise-grade security features to protect your data and meet compliance requirements.</p>
+                        <ul class="feature-list">
+                            <li>Role-based access control</li>
+                            <li>Data encryption at rest and in transit</li>
+                            <li>Audit logging</li>
+                            <li>Compliance reporting</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Automated Workflows</h3>
+                        <p>Streamline your operations with powerful automation capabilities.</p>
+                        <ul class="feature-list">
+                            <li>Custom alert workflows</li>
+                            <li>Automated incident response</li>
+                            <li>Integration with popular tools</li>
+                            <li>Custom automation rules</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Mobile Access</h3>
+                        <p>Monitor your systems from anywhere with our mobile app.</p>
+                        <ul class="feature-list">
+                            <li>Real-time mobile alerts</li>
+                            <li>On-the-go dashboard access</li>
+                            <li>Quick incident response</li>
+                            <li>Offline mode support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section class="integrations">
+        <div class="container">
+            <div class="category-title">
+                <h2>Seamless Integrations</h2>
+                <p>Connect LogFoundry with your favorite tools and services</p>
+            </div>
+            <div class="integration-grid">
+                <div class="integration-item">
+                    <img src="https://via.placeholder.com/100" alt="AWS">
+                    <h4>AWS</h4>
+                </div>
+                <div class="integration-item">
+                    <img src="https://via.placeholder.com/100" alt="Azure">
+                    <h4>Azure</h4>
+                </div>
+                <div class="integration-item">
+                    <img src="https://via.placeholder.com/100" alt="GCP">
+                    <h4>GCP</h4>
+                </div>
+                <div class="integration-item">
+                    <img src="https://via.placeholder.com/100" alt="Slack">
+                    <h4>Slack</h4>
+                </div>
+                <div class="integration-item">
+                    <img src="https://via.placeholder.com/100" alt="Jira">
+                    <h4>Jira</h4>
+                </div>
+                <div class="integration-item">
+                    <img src="https://via.placeholder.com/100" alt="GitHub">
+                    <h4>GitHub</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Experience LogFoundry?</h2>
+            <p>Start your free trial today and see how LogFoundry can transform your observability experience.</p>
+            <a href="index.html#onboarding" class="cta-button">Start Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LogFoundry</h3>
+                    <p>Think Beyond Logs. Think LogFoundry!</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="integrations.html">Integrations</a></li>
+                        <li><a href="roadmap.html">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="webinars.html">Webinars</a></li>
+                        <li><a href="support.html">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LogFoundry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

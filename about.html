@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About LogFoundry - AI-Powered Observability Platform</title>
+    <link rel="icon" type="image/x-icon" href="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc">
+    <style>
+        /* Global Styles (same as onboarding page) */
+        :root {
+            --primary: #2b6cb0;
+            --primary-dark: #2c5282;
+            --secondary: #f6ad55;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #a0aec0;
+            --success: #48bb78;
+            --error: #f56565;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles (same as onboarding page) */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section - About Version */
+        .about-hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .about-hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .about-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Mission Section */
+        .mission {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .mission-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .mission-content {
+            flex: 1;
+        }
+        
+        .mission-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .section-title {
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray-dark);
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 80px 0;
+            background-color: var(--gray);
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-image {
+            height: 200px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .member-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-info {
+            padding: 25px 20px;
+        }
+        
+        .member-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .member-info p {
+            color: var(--gray-dark);
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--primary);
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Values Section */
+        .values {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .value-card {
+            padding: 30px;
+            border-radius: 8px;
+            background-color: var(--light);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .value-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .value-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .value-card p {
+            color: var(--gray-dark);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Footer (same as onboarding page) */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .mission-container {
+                flex-direction: column;
+            }
+            
+            .about-hero h2 {
+                font-size: 32px;
+            }
+            
+            .about-hero p {
+                font-size: 18px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .cta h2 {
+                font-size: 28px;
+            }
+            
+            .cta p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc" alt="LogFoundry Logo">
+                <h1>LogFoundry</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h2>Building Smarter Observability</h2>
+            <p>LogFoundry was founded to transform how teams interact with their log data, turning complexity into clarity with AI-powered insights.</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container mission-container">
+            <div class="mission-content">
+                <div class="section-title">
+                    <h2>Our Mission</h2>
+                    <p>Why we do what we do</p>
+                </div>
+                <p>At LogFoundry, we believe that every engineering team deserves world-class observability without the operational overhead. Traditional log management solutions require extensive setup, tuning, and maintenance - distracting teams from their core work.</p>
+                <p>We built LogFoundry on the Elastic Stack to give teams:</p>
+                <ul style="margin: 20px 0; padding-left: 20px;">
+                    <li style="margin-bottom: 10px;">Pre-configured dashboards tailored to their stack</li>
+                    <li style="margin-bottom: 10px;">AI-powered anomaly detection out of the box</li>
+                    <li style="margin-bottom: 10px;">Managed infrastructure that scales with their needs</li>
+                    <li>Actionable insights rather than raw data overload</li>
+                </ul>
+                <p>Our mission is to help teams move faster by providing intelligent observability that just works.</p>
+            </div>
+            <div class="mission-image">
+                <img src="https://img.freepik.com/premium-vector/teamwork-collaboration-banner-with-colored-line-icons-team-goal-inspiration-career-typography-infographics-concept-team-work-isolated-vector-illustration_108855-2801.jpg" alt="LogFoundry team working">
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <!-- <section class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Team</h2>
+                <p>The people behind LogFoundry's intelligent observability platform</p>
+            </div>
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Alex Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Alex Johnson</h3>
+                        <p>CEO & Co-founder</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Sarah Chen">
+                    </div>
+                    <div class="member-info">
+                        <h3>Sarah Chen</h3>
+                        <p>CTO & Co-founder</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Michael Rodriguez">
+                    </div>
+                    <div class="member-info">
+                        <h3>Michael Rodriguez</h3>
+                        <p>Head of Engineering</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Priya Patel">
+                    </div>
+                    <div class="member-info">
+                        <h3>Priya Patel</h3>
+                        <p>Head of Customer Success</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+                <p>The principles that guide everything we do</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">✓</div>
+                    <h3>Customer Obsession</h3>
+                    <p>We start with the customer and work backwards. Your success is our success, and we measure our work by its impact on your operations.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">♻</div>
+                    <h3>Simplify Complexity</h3>
+                    <p>We believe in making sophisticated technology accessible. Our job is to handle the complexity so you don't have to.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🚀</div>
+                    <h3>Innovate Relentlessly</h3>
+                    <p>We constantly push the boundaries of what's possible with log data, applying the latest AI and machine learning techniques.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Collaborate Openly</h3>
+                    <p>We work transparently with our customers, partners, and each other. Great ideas can come from anywhere.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🔍</div>
+                    <h3>Data-Driven Decisions</h3>
+                    <p>We practice what we preach, using our own platform to measure and improve everything we do.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">❤️</div>
+                    <h3>Build with Empathy</h3>
+                    <p>We design for real people facing real challenges. Understanding your pain points drives our product development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Observability?</h2>
+            <p>Join the growing number of teams who rely on LogFoundry for intelligent log analysis and actionable insights.</p>
+            <a href="index.html#onboarding" class="cta-button">Start Onboarding Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LogFoundry</h3>
+                    <p>Think Beyond Logs. Think LogFoundry!</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Support</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LogFoundry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for social icons (you'd include this in real implementation) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html>

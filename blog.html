@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - LogFoundry</title>
+    <link rel="icon" type="image/x-icon" href="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2b6cb0;
+            --primary-dark: #2c5282;
+            --secondary: #f6ad55;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #a0aec0;
+            --success: #48bb78;
+            --error: #f56565;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        /* Blog Hero Section */
+        .blog-hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .blog-hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .blog-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Blog Layout */
+        .blog-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        /* Main Content */
+        .blog-posts {
+            display: grid;
+            gap: 40px;
+        }
+
+        .blog-post {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-post-content {
+            padding: 20px;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            color: var(--gray-dark);
+            font-size: 14px;
+        }
+
+        .blog-post-meta i {
+            color: var(--primary);
+        }
+
+        .blog-post-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .blog-post-excerpt {
+            color: var(--gray-dark);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .blog-post-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .blog-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Sidebar */
+        .blog-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .widget-search input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .widget-categories ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .widget-categories li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .widget-categories li:last-child {
+            border-bottom: none;
+        }
+
+        .widget-categories a {
+            color: var(--gray-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .widget-categories a:hover {
+            color: var(--primary);
+        }
+
+        .widget-categories .count {
+            background: var(--light);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .widget-recent-posts .recent-post {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .widget-recent-posts .recent-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .recent-post-image {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .recent-post-content h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .recent-post-content p {
+            font-size: 12px;
+            color: var(--gray-dark);
+        }
+
+        .widget-tags .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-cloud a {
+            background: var(--light);
+            color: var(--gray-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tag-cloud a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .pagination a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .pagination a:hover,
+        .pagination a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .blog-hero h2 {
+                font-size: 32px;
+            }
+
+            .blog-hero p {
+                font-size: 18px;
+            }
+
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc" alt="LogFoundry Logo">
+                <h1>LogFoundry</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="container">
+            <h2>LogFoundry Blog</h2>
+            <p>Insights, updates, and best practices for modern observability</p>
+        </div>
+    </section>
+
+    <!-- Blog Layout -->
+    <div class="container blog-container">
+        <!-- Main Content -->
+        <main class="blog-posts">
+            <article class="blog-post">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="AI-Powered Insights" class="blog-post-image">
+                <div class="blog-post-content">
+                    <div class="blog-post-meta">
+                        <span><i class="fas fa-calendar"></i> March 15, 2024</span>
+                        <span><i class="fas fa-user"></i> John Doe</span>
+                        <span><i class="fas fa-clock"></i> 5 min read</span>
+                    </div>
+                    <h3 class="blog-post-title">The Future of Log Management: AI-Powered Insights</h3>
+                    <p class="blog-post-excerpt">Discover how artificial intelligence is revolutionizing log management and providing deeper insights into your system's performance.</p>
+                    <div class="blog-post-tags">
+                        <span class="blog-tag">AI</span>
+                        <span class="blog-tag">Log Management</span>
+                        <span class="blog-tag">Technology</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Modern Observability" class="blog-post-image">
+                <div class="blog-post-content">
+                    <div class="blog-post-meta">
+                        <span><i class="fas fa-calendar"></i> March 10, 2024</span>
+                        <span><i class="fas fa-user"></i> Jane Smith</span>
+                        <span><i class="fas fa-clock"></i> 8 min read</span>
+                    </div>
+                    <h3 class="blog-post-title">10 Best Practices for Modern Observability</h3>
+                    <p class="blog-post-excerpt">Learn the essential practices that will help you implement effective observability in your modern applications.</p>
+                    <div class="blog-post-tags">
+                        <span class="blog-tag">Observability</span>
+                        <span class="blog-tag">Best Practices</span>
+                        <span class="blog-tag">DevOps</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cloud-Native World" class="blog-post-image">
+                <div class="blog-post-content">
+                    <div class="blog-post-meta">
+                        <span><i class="fas fa-calendar"></i> March 5, 2024</span>
+                        <span><i class="fas fa-user"></i> Mike Johnson</span>
+                        <span><i class="fas fa-clock"></i> 6 min read</span>
+                    </div>
+                    <h3 class="blog-post-title">Logging in a Cloud-Native World</h3>
+                    <p class="blog-post-excerpt">Explore the challenges and solutions for effective logging in cloud-native environments.</p>
+                    <div class="blog-post-tags">
+                        <span class="blog-tag">Cloud</span>
+                        <span class="blog-tag">Logging</span>
+                        <span class="blog-tag">Microservices</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">Next →</a>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="blog-sidebar">
+            <div class="widget widget-search">
+                <h3 class="widget-title">Search</h3>
+                <input type="text" placeholder="Search articles...">
+            </div>
+
+            <div class="widget widget-categories">
+                <h3 class="widget-title">Categories</h3>
+                <ul>
+                    <li><a href="#">Log Management <span class="count">12</span></a></li>
+                    <li><a href="#">Observability <span class="count">8</span></a></li>
+                    <li><a href="#">Cloud Computing <span class="count">15</span></a></li>
+                    <li><a href="#">DevOps <span class="count">10</span></a></li>
+                    <li><a href="#">Security <span class="count">7</span></a></li>
+                </ul>
+            </div>
+
+            <div class="widget widget-recent-posts">
+                <h3 class="widget-title">Recent Posts</h3>
+                <div class="recent-post">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Recent Post" class="recent-post-image">
+                    <div class="recent-post-content">
+                        <h4>The Future of Log Management</h4>
+                        <p>March 15, 2024</p>
+                    </div>
+                </div>
+                <div class="recent-post">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Recent Post" class="recent-post-image">
+                    <div class="recent-post-content">
+                        <h4>10 Best Practices for Modern Observability</h4>
+                        <p>March 10, 2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget widget-tags">
+                <h3 class="widget-title">Popular Tags</h3>
+                <div class="tag-cloud">
+                    <a href="#">Logging</a>
+                    <a href="#">Observability</a>
+                    <a href="#">Cloud</a>
+                    <a href="#">DevOps</a>
+                    <a href="#">Security</a>
+                    <a href="#">AI</a>
+                    <a href="#">Monitoring</a>
+                    <a href="#">Best Practices</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LogFoundry</h3>
+                    <p>Think Beyond Logs. Think LogFoundry!</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="integrations.html">Integrations</a></li>
+                        <li><a href="roadmap.html">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="webinars.html">Webinars</a></li>
+                        <li><a href="support.html">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LogFoundry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

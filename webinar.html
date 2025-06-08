@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinars - LogFoundry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #3b82f6;
+            --light: #f1f5f9;
+            --gray: #e2e8f0;
+            --gray-dark: #64748b;
+            --dark: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Webinar Grid */
+        .webinar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .webinar-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .webinar-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .webinar-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .webinar-content {
+            padding: 1.5rem;
+        }
+
+        .webinar-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .webinar-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .webinar-description {
+            color: var(--gray-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .webinar-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .webinar-meta i {
+            color: var(--primary);
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .register-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .webinar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">LogFoundry</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Learn from the Experts</h1>
+            <p>Join our webinars to learn about log management, observability, and best practices from industry experts.</p>
+        </div>
+    </section>
+
+    <section class="upcoming-webinars">
+        <div class="container">
+            <div class="section-header">
+                <h2>Upcoming Webinars</h2>
+                <p>Register for our upcoming webinars and enhance your knowledge</p>
+            </div>
+            <div class="webinar-grid">
+                <div class="webinar-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="AI in Log Management" class="webinar-image">
+                    <div class="webinar-content">
+                        <div class="webinar-date">April 15, 2024 • 2:00 PM IST</div>
+                        <h3 class="webinar-title">AI-Powered Log Analysis: The Future of Observability</h3>
+                        <p class="webinar-description">Learn how artificial intelligence is transforming log analysis and helping teams identify issues before they impact users.</p>
+                        <div class="webinar-meta">
+                            <span><i class="fas fa-user"></i> John Doe</span>
+                            <span><i class="fas fa-clock"></i> 60 min</span>
+                        </div>
+                        <a href="#" class="register-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="webinar-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cloud Native Logging" class="webinar-image">
+                    <div class="webinar-content">
+                        <div class="webinar-date">April 22, 2024 • 3:00 PM IST</div>
+                        <h3 class="webinar-title">Logging in Cloud-Native Environments</h3>
+                        <p class="webinar-description">Explore best practices for implementing effective logging strategies in cloud-native applications.</p>
+                        <div class="webinar-meta">
+                            <span><i class="fas fa-user"></i> Jane Smith</span>
+                            <span><i class="fas fa-clock"></i> 45 min</span>
+                        </div>
+                        <a href="#" class="register-btn">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="webinar-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Security Logging" class="webinar-image">
+                    <div class="webinar-content">
+                        <div class="webinar-date">April 29, 2024 • 2:30 PM IST</div>
+                        <h3 class="webinar-title">Security Logging and Compliance</h3>
+                        <p class="webinar-description">Learn how to implement effective security logging practices and meet compliance requirements.</p>
+                        <div class="webinar-meta">
+                            <span><i class="fas fa-user"></i> Mike Johnson</span>
+                            <span><i class="fas fa-clock"></i> 60 min</span>
+                        </div>
+                        <a href="#" class="register-btn">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="past-webinars">
+        <div class="container">
+            <div class="section-header">
+                <h2>Past Webinars</h2>
+                <p>Watch recordings of our previous webinars</p>
+            </div>
+            <div class="webinar-grid">
+                <div class="webinar-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Getting Started" class="webinar-image">
+                    <div class="webinar-content">
+                        <div class="webinar-date">March 15, 2024</div>
+                        <h3 class="webinar-title">Getting Started with LogFoundry</h3>
+                        <p class="webinar-description">A comprehensive guide to getting started with LogFoundry and implementing effective log management.</p>
+                        <div class="webinar-meta">
+                            <span><i class="fas fa-user"></i> Sarah Wilson</span>
+                            <span><i class="fas fa-clock"></i> 45 min</span>
+                        </div>
+                        <a href="#" class="register-btn">Watch Recording</a>
+                    </div>
+                </div>
+
+                <div class="webinar-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Advanced Features" class="webinar-image">
+                    <div class="webinar-content">
+                        <div class="webinar-date">March 8, 2024</div>
+                        <h3 class="webinar-title">Advanced Log Analysis Techniques</h3>
+                        <p class="webinar-description">Learn advanced techniques for analyzing logs and extracting valuable insights from your data.</p>
+                        <div class="webinar-meta">
+                            <span><i class="fas fa-user"></i> David Brown</span>
+                            <span><i class="fas fa-clock"></i> 60 min</span>
+                        </div>
+                        <a href="#" class="register-btn">Watch Recording</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="integrations.html">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="webinar.html">Webinars</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="roadmap.html">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LogFoundry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

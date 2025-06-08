@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrations - LogFoundry</title>
+    <link rel="icon" type="image/x-icon" href="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2b6cb0;
+            --primary-dark: #2c5282;
+            --secondary: #f6ad55;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #a0aec0;
+            --success: #48bb78;
+            --error: #f56565;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Integration Categories */
+        .integration-categories {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .category-card h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .category-card p {
+            color: var(--gray-dark);
+        }
+
+        /* Integration List */
+        .integration-list {
+            padding: 80px 0;
+            background-color: var(--gray);
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .integration-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .integration-image {
+            height: 150px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .integration-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .integration-info {
+            padding: 20px;
+        }
+
+        .integration-info h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .integration-info p {
+            color: var(--gray-dark);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .integration-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .integration-link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc" alt="LogFoundry Logo">
+                <h1>LogFoundry</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Integrations</h2>
+            <p>Connect LogFoundry with your favorite tools and services to create a complete observability solution.</p>
+        </div>
+    </section>
+
+    <!-- Integration Categories -->
+    <section class="integration-categories">
+        <div class="container">
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">☁️</div>
+                    <h3>Cloud Providers</h3>
+                    <p>Seamlessly integrate with AWS, Azure, and Google Cloud Platform for comprehensive cloud monitoring.</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📊</div>
+                    <h3>Monitoring Tools</h3>
+                    <p>Connect with popular monitoring solutions like Prometheus, Grafana, and Datadog.</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🔔</div>
+                    <h3>Notification Services</h3>
+                    <p>Send alerts to Slack, PagerDuty, and other notification platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration List -->
+    <section class="integration-list">
+        <div class="container">
+            <div class="integration-grid">
+                <!-- Cloud Providers -->
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
+                    </div>
+                    <div class="integration-info">
+                        <h3>AWS</h3>
+                        <p>Collect logs from EC2, Lambda, CloudWatch, and other AWS services.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure">
+                    </div>
+                    <div class="integration-info">
+                        <h3>Azure</h3>
+                        <p>Monitor Azure resources and collect logs from Azure Monitor.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP">
+                    </div>
+                    <div class="integration-info">
+                        <h3>Google Cloud</h3>
+                        <p>Integrate with Google Cloud Platform services and collect logs.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <!-- Monitoring Tools -->
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Prometheus_software_logo.svg" alt="Prometheus">
+                    </div>
+                    <div class="integration-info">
+                        <h3>Prometheus</h3>
+                        <p>Import metrics from Prometheus and correlate with logs.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Grafana_icon.svg" alt="Grafana">
+                    </div>
+                    <div class="integration-info">
+                        <h3>Grafana</h3>
+                        <p>Visualize LogFoundry data in Grafana dashboards.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Datadog_logo.svg" alt="Datadog">
+                    </div>
+                    <div class="integration-info">
+                        <h3>Datadog</h3>
+                        <p>Send logs to Datadog for unified monitoring.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <!-- Notification Services -->
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack">
+                    </div>
+                    <div class="integration-info">
+                        <h3>Slack</h3>
+                        <p>Send alerts and notifications to Slack channels.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Pagerduty_logo.svg" alt="PagerDuty">
+                    </div>
+                    <div class="integration-info">
+                        <h3>PagerDuty</h3>
+                        <p>Create incidents and alerts in PagerDuty.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Teamspeak_logo.svg" alt="Teams">
+                    </div>
+                    <div class="integration-info">
+                        <h3>Microsoft Teams</h3>
+                        <p>Send notifications to Microsoft Teams channels.</p>
+                        <a href="#" class="integration-link">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LogFoundry</h3>
+                    <p>Think Beyond Logs. Think LogFoundry!</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Support</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LogFoundry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

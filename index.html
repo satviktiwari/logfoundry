@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogFoundry - AI-Powered Log Intelligence Onboarding</title>
+    <link rel="icon" type="image/x-icon" href="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2b6cb0;
+            --primary-dark: #2c5282;
+            --secondary: #f6ad55;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #a0aec0;
+            --success: #48bb78;
+            --error: #f56565;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Onboarding Process Section */
+        .onboarding-process {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray-dark);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            margin: 0 15px 30px;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 8px;
+            background-color: var(--light);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .step h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .step p {
+            color: var(--gray-dark);
+        }
+        
+        /* Onboarding Form Section */
+        .onboarding-form {
+            padding: 80px 0;
+            background-color: var(--gray);
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-title h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .form-title p {
+            color: var(--gray-dark);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            padding: 30px;
+            border-radius: 8px;
+            background-color: var(--light);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .feature-card p {
+            color: var(--gray-dark);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--gray);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 50px auto 0;
+            text-align: center;
+        }
+        
+        .testimonial {
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 15px 20px;
+            background-color: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            .step {
+                margin: 0 0 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://media.licdn.com/dms/image/v2/D560BAQHKOR0mwr9Gmg/company-logo_200_200/B56ZbeRdQPGoAI-/0/1747485840832/logfoundry_logo?e=1753315200&v=beta&t=8kX46w2tJpLW8Hxi4xfgDN0GvZEpBOGKrJBnbEfX6Sc" alt="LogFoundry Logo">
+                <h1>LogFoundry</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Transform Your Logs Into Actionable Insights</h2>
+            <p>Get started with LogFoundry's AI-powered observability platform in just a few simple steps. We'll set up your Elastic cluster and custom dashboards so you can focus on what matters.</p>
+            <a href="#onboarding" class="cta-button">Start Onboarding Now</a>
+        </div>
+    </section>
+
+    <!-- Onboarding Process Section -->
+    <section class="onboarding-process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple Onboarding Process</h2>
+                <p>We handle the heavy lifting so you can start gaining insights from your logs quickly</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <h3>Describe Your Infrastructure</h3>
+                    <p>Tell us about your backend systems (Python, Node.js, Java, etc.) and logging setup.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <h3>We Provision Your Cluster</h3>
+                    <p>Our team sets up a dedicated Elastic cluster optimized for your specific needs.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <h3>Receive Your Dashboard</h3>
+                    <p>Get a custom dashboard with key metrics and alerts tailored to your stack.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">4</div>
+                    <h3>Start Monitoring</h3>
+                    <p>Connect your systems and begin gaining insights immediately.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding Form Section -->
+    <section class="onboarding-form" id="onboarding">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-title">
+                    <h2>Get Started with LogFoundry</h2>
+                    <p>Fill out this form to begin your onboarding process. We'll contact you within 24 hours to discuss next steps.</p>
+                </div>
+                
+                <form id="onboardingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="backend">Primary Backend Technology</label>
+                        <select id="backend" name="backend" required>
+                            <option value="">Select your backend...</option>
+                            <option value="python-flask">Python Flask</option>
+                            <option value="python-django">Python Django</option>
+                            <option value="nodejs">Node.js</option>
+                            <option value="java-springboot">Java Spring Boot</option>
+                            <option value="ruby-rails">Ruby on Rails</option>
+                            <option value="dotnet">.NET</option>
+                            <option value="go">Go</option>
+                            <option value="php">PHP</option>
+                            <option value="other">Other (please specify)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="other-tech">Other Technologies in Your Stack (optional)</label>
+                        <input type="text" id="other-tech" name="other-tech" placeholder="e.g., Redis, PostgreSQL, Kubernetes">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="log-volume">Estimated Daily Log Volume</label>
+                        <select id="log-volume" name="log-volume" required>
+                            <option value="">Select volume...</option>
+                            <option value="small">&lt; 1GB/day</option>
+                            <option value="medium">1-10GB/day</option>
+                            <option value="large">10-50GB/day</option>
+                            <option value="xlarge">50-100GB/day</option>
+                            <option value="xxlarge">&gt; 100GB/day</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="current-logging">Current Logging Solution (if any)</label>
+                        <input type="text" id="current-logging" name="current-logging" placeholder="e.g., ELK stack, Splunk, CloudWatch">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requirements">Specific Requirements or Challenges</label>
+                        <textarea id="requirements" name="requirements" placeholder="Describe what you're looking to monitor, any pain points with your current solution, and specific metrics you care about most."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Onboarding Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Log Intelligence Features</h2>
+                <p>LogFoundry provides everything you need for comprehensive observability</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>AI-Powered Anomaly Detection</h3>
+                    <p>Our machine learning models automatically detect unusual patterns in your logs before they become problems.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Custom Dashboards</h3>
+                    <p>Get pre-configured dashboards tailored to your specific technology stack and monitoring needs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Real-time Alerting</h3>
+                    <p>Configure alerts for critical events and receive notifications through Slack, email, or PagerDuty.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Performance Metrics</h3>
+                    <p>Track response times, error rates, throughput, and other key performance indicators.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Security Monitoring</h3>
+                    <p>Identify suspicious activity and potential security threats with built-in detection rules.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Root Cause Analysis</h3>
+                    <p>Quickly drill down to the source of issues with correlated logs and metrics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>Don't just take our word for it - hear from teams using LogFoundry</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p class="testimonial-text">"LogFoundry helped us reduce our mean time to resolution by 65%. Their custom dashboards gave us visibility we never had before."</p>
+                    <p class="testimonial-author">- Sarah K., DevOps Lead at TechCorp</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Answers to common questions about our onboarding process</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does onboarding typically take?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most customers are up and running within 2-3 business days after submitting their information. Complex environments may take slightly longer, but we'll keep you informed throughout the process.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What information do you need to create my dashboard?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We primarily need to know about your technology stack (backend frameworks, databases, etc.), the types of logs you generate, and which metrics are most important to your team. The more detail you can provide in the onboarding form, the better we can tailor your dashboard.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I modify the dashboard after setup?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We provide you with full access to your Elastic cluster and Kibana instance, so you can customize dashboards, create new visualizations, and adjust alerts as needed. We also offer training sessions to help your team get the most out of the platform.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a trial period?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer a 14-day free trial so you can evaluate LogFoundry with your actual data and workflows. There's no obligation to continue if it doesn't meet your needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LogFoundry</h3>
+                    <p>Think Beyond Logs. Think LogFoundry!</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="documentation.html">Documentation</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Support</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LogFoundry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                
+                // Toggle the +/- icon
+                const icon = question.querySelector('span:last-child');
+                icon.textContent = item.classList.contains('active') ? '-' : '+';
+            });
+        });
+        
+        // Form submission handling
+        document.getElementById('onboardingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your submission! Our team will review your information and contact you within 24 hours to discuss next steps.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
